@@ -2,7 +2,7 @@ import React from 'react';
 
 type MyProps = {
   versions: number;
-  onClick: (index: number) => {};
+  onClick: (index: number) => void;
 };
 type MyState = {};
 
@@ -12,14 +12,14 @@ class History extends React.Component<MyProps, MyState> {
       <ul>
         {[...Array(this.props.versions)].map((e, i) => {
           return (
-            <li
+            <button
               key={i}
               onClick={() => {
                 this.props.onClick(i);
               }}
             >
               Move {i}
-            </li>
+            </button>
           );
         })}
       </ul>
