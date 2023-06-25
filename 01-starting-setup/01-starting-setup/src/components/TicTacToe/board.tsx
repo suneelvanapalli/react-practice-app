@@ -85,7 +85,9 @@ class Board extends React.Component<MyProps, MyState> {
         </div>
         <History
           versions={this.state.history.length}
-                onClick={(i: number) => { this.handleHistoryVersionClick(i); }}
+          onClick={(i: number) => {
+            this.handleHistoryVersionClick(i);
+          }}
         ></History>
       </div>
     );
@@ -98,11 +100,14 @@ class Board extends React.Component<MyProps, MyState> {
 
   handleClick(i: number) {
     let nextSquares = this.state.squares.slice();
-    nextSquares[i] = this.state.isXPlaying ? 'X' : 'O';
-    // this is to set the previous state in the history
-    this.setState({ history: [...this.state.history, this.state.squares] });
-    this.setState({ squares: nextSquares });
-    this.togglePlayerTurn();
+    // set the value only when the cell/box isn't clicked already
+    if (nextSquares[i] === '') {
+      nextSquares[i] = this.state.isXPlaying ? 'X' : 'O';
+      // this is to set the previous state in the history
+      this.setState({ history: [...this.state.history, this.state.squares] });
+      this.setState({ squares: nextSquares });
+      this.togglePlayerTurn();
+    }
   }
 
   togglePlayerTurn() {
